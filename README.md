@@ -9,7 +9,7 @@ This program scrapes college football data (FBS schools only) for the past 10 ye
 
 Python 3 is required, along with several libraries, all of which comes standard in Continuum's Anaconda Python distrbution (found here: https://www.continuum.io/downloads).
 
-SQLite is also required (found here: https://sqlite.org/). 
+SQLite is also required (found here: http://sqlitebrowser.org/). 
 
 
 ##EXPLANATION OF TABLE OUTPUTS IN SQLITE
