@@ -60,6 +60,6 @@ This table provides summary statistics of each school's performance in a given y
 
 ##KNOWN BUGS
 
-..* TeamSplits table is currently not populating the Wins and Losses columns for games played at a Neutral site.
+* TeamSplits table is currently not populating the Wins and Losses columns for games played at a Neutral site.
 
 
