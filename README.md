@@ -4,7 +4,7 @@ This program scrapes college football data (FBS schools only) for the past 10 ye
 
 10 years is an arbitrary number and can be of course changed. The code does take some time to run (i.e. several hours).
 
-Cuts of data will continue to be added. Of course, some information may change making new information available or previous displayed information unavailable.
+I will continue to improve the performance of the script and potentially add more data as time permits. Of course, as the webiste changes its layout information will change, possibly making new information available or previous displayed information unavailable. 
 
 
 ##REQUIREMENTS
