@@ -6,6 +6,8 @@ This program scrapes college football data (FBS schools only) for the past 10 ye
 
 I will continue to improve the performance of the script and potentially add more data as time permits. Of course, as the webiste changes its layout information will change, possibly making new information available or previous displayed information unavailable. 
 
+I am currently working on bringing in individual game statistics.
+
 
 ##REQUIREMENTS
 
