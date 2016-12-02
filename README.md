@@ -47,7 +47,7 @@ This table provides summary statistics of each school's performance in a given y
 **Source Script:** PushToTeamSplits.py
 
 ###TeamStatistics Table
-This table provides summary statistics of each school's performance in a given year broken out by Offense and Defense. Compared to the TEAM SPLITS table, this table provides a higher level of aggregation.
+This table provides summary statistics of each school's performance in a given year broken out by Offense and Defense. Compared to the TeamSplits table, this table provides a higher level of aggregation.
 
 **Columns**: SchoolName, Year, Side, GamesPlayed, PassingCompletions, PassingAtmpts, PassingCompletePct, PassingTotYds,PassingTDs, RushingAtmpts, RushingTotYds, RushingAvgYds, RushingTDs, TotalOffensePlays, TotalOffenseTotYds, TotalOffenseAvgYds, FirstDownsByPassing, FirstDownsByRushing, FirstDownsByPenalty, FirstDownsTot, PenaltiesTot, PenaltiesYds, TurnoversByFumble, TurnoversByInt, TurnoversTot
 
