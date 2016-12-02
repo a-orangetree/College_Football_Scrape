@@ -44,6 +44,6 @@ This table is populated by running the PushToTeamSplits.py script.
 ###TEAM STATISTICS
 This table provides summary statistics of each school's performance in a given year broken out by Offense and Defense. Compared to the TEAM SPLITS table, this table provides a higher level of aggregation.
 
-This table is populated by running the PushToTeamStatistics.py script.
+This table is populated by running the PushToTeamYearStats.py script.
 
 
