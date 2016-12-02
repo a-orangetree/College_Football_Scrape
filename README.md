@@ -8,7 +8,7 @@ I will continue to improve the performance of the script and potentially add mor
 
 I am currently working on bringing in individual game statistics.
 
-The attached CFBData DB is a sample database showes the tables and data to be expected. 
+The attached CFBData DB is a sample database which shows the tables and data to be expected. 
 
 
 ##REQUIREMENTS
