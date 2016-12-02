@@ -8,6 +8,8 @@ I will continue to improve the performance of the script and potentially add mor
 
 I am currently working on bringing in individual game statistics.
 
+The attached CFBData DB is a sample database showes the tables and data to be expected. 
+
 
 ##REQUIREMENTS
 
@@ -54,5 +56,10 @@ This table provides summary statistics of each school's performance in a given y
 **Columns**: SchoolName, Year, Side, GamesPlayed, PassingCompletions, PassingAtmpts, PassingCompletePct, PassingTotYds,PassingTDs, RushingAtmpts, RushingTotYds, RushingAvgYds, RushingTDs, TotalOffensePlays, TotalOffenseTotYds, TotalOffenseAvgYds, FirstDownsByPassing, FirstDownsByRushing, FirstDownsByPenalty, FirstDownsTot, PenaltiesTot, PenaltiesYds, TurnoversByFumble, TurnoversByInt, TurnoversTot
 
 **Source Script:** PushToTeamYearStats.py
+
+
+##KNOWN BUGS
+
+..* TeamSplits table is currently not populating the Wins and Losses columns for games played at a Neutral site.
 
 
