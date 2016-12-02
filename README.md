@@ -16,32 +16,32 @@ SQLite is recommended, though not required (found here: http://sqlitebrowser.org
 
 Various scripts create/update tables in an SQLite DB. What information is populated on each table and which query is responsible for populating that particular table.
 
-###COACH
+###Coach Table
 This table provides a yearly summary of each school's head coach. If the coach was not retained throughout the entire season, that given year will be duplicated and each coach will have a separate row.
 
 This table is populated by running the PushToTeamSplits.py script.
 
-###CONFERENCE
+###Conference Table
 This table provides a yearly summary of each school's conference. Because schools do not change conference mid-season, there should be no concern any school has multiple conference values in a given year. 
 
 This table is populated by running the PushToTeamSplits.py script.
 
-###GAME RESULTS
+###Game Results Table
 This table provides statistics for each game a school played over the period of time indicated.
 
 This table is populated by running the AutoRunPushToGameResults.py script. This script calls the PushToGameResultsTest2 script. Prior to this table being populated, you *must* populate the SeasonResults table.
 
-###SEASON RESULTS
+###Season Results Table
 This table provides outcome statistics of each game a school played in a given year.
 
 This table is populated by running the PushToSeasonResults.py script.
 
-###TEAM SPLITS
+###Team Splits Table
 This table provides summary statistics of each school's performance in a given year broken down first by Offense and Defense and then further by Home, Road, Win, Loss.
 
 This table is populated by running the PushToTeamSplits.py script.
 
-###TEAM STATISTICS
+###Team Statistics Table
 This table provides summary statistics of each school's performance in a given year broken out by Offense and Defense. Compared to the TEAM SPLITS table, this table provides a higher level of aggregation.
 
 This table is populated by running the PushToTeamYearStats.py script.
