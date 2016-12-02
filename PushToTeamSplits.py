@@ -9,7 +9,7 @@ import time
 currentSchoolYear = 2016
 
 # Used for testing. If "Yes" only a subsection of schools will be scraped and populated in the database
-isThisATest = 'yes'
+isThisATest = 'no'
 
 
 #########################################################################
@@ -194,8 +194,6 @@ for college in colleges:
         year = year + 1
         
 print ('Conference and Coach tables have been populated')
-print (time.asctime(time.localtime(time.time())))
-
 ###############################################################################
 
 #Defines a function to populate data in the TeamSplits table. The function is called in the next section.  
