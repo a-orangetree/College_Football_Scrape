@@ -9,7 +9,7 @@ This program scrapes college football data (FBS schools only) for the past 10 ye
 
 Python 3 is required, along with several libraries, all of which comes standard in Continuum's Anaconda Python distrbution (found here: https://www.continuum.io/downloads).
 
-SQLite is also required (found here: http://sqlitebrowser.org/). 
+SQLite is recommended, though not required (found here: http://sqlitebrowser.org/). All the data can be accessed using Python. However, using SQLite Browser may make some manipulations easier.
 
 
 ##EXPLANATION OF TABLE OUTPUTS IN SQLITE
@@ -29,7 +29,7 @@ This table is populated by running the PushToTeamSplits.py script.
 ###GAME RESULTS
 This table provides statistics for each game a school played over the period of time indicated.
 
-This table is populated by running the PushToGameResultsTest2.py script.
+This table is populated by running the AutoRunPushToGameResults.py script. This script calls the PushToGameResultsTest2 script. Prior to this table being populated, you *must* populate the SeasonResults table.
 
 ###SEASON RESULTS
 This table provides outcome statistics of each game a school played in a given year.
