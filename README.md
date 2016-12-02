@@ -1,10 +1,10 @@
 ##INTRODUCTION
 
-This program scrapes college football data (FBS schools only) for the past 10 years from http://www.sports-reference.com. Several  cuts of data are produced and then stored in an SQLite database. The motivation behind scraping the data to practice statistics and other analytical methods (using Python, of course). 
+This program performs a webscrape of college football data (FBS schools only) from http://www.sports-reference.com. Several  cuts of data are produced and then stored in an SQLite database. The motivation behind scraping the data to practice statistics and other analytical methods (using Python, of course). 
 
-10 years is an arbitrary number and can be of course changed. The code does take some time to run (i.e. several hours).
+The data collected is for the past 10 years. 10 years is an arbitrary number, of course, and can be changed. The code does take some time to run (i.e. several hours).
 
-I will continue to improve the performance of the script and potentially add more data as time permits. Of course, as the webiste changes new information may become available or previously displayed information may disappear. 
+I will continue to improve the performance of the script and potentially add more data as time permits. Websites change often however, and changes will potentially create bugs and make new information available or previously displayed information unavailable. 
 
 I am currently working on bringing in individual game statistics.
 
