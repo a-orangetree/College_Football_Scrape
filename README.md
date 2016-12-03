@@ -6,14 +6,14 @@ The data collected is for the past 10 years. 10 years is an arbitrary number, of
 
 I will continue to improve the performance of the script and potentially add more data as time permits. Websites change often however, and changes will potentially create bugs and make new information available or previously displayed information unavailable. 
 
-I am currently working on bringing in individual game statistics.
-
-The attached CFBData DB is a sample database which shows the tables and data to be expected. 
+I am currently working on bringing in individual game statistics. 
 
 
 ##REQUIREMENTS
 
 Python 3 is required, along with several libraries, all of which comes standard in Continuum's Anaconda Python distrbution (found here: https://www.continuum.io/downloads).
+
+Jupyter Notebook is required to view the SampleAnalysisUsingPython&JupyterNotebook.ipynb. This package comes standard in Continuum's Anaconda Python distributon as well, or it can be downloaded separately (found here: https://jupyter.org/). Once installed, open a terminal and type: "jupyter notebook" to open the program. 
 
 SQLite is recommended, though not required (found here: http://sqlitebrowser.org/). All the data can be accessed using Python. However, using SQLite Browser may make some manipulations easier. Also, at any point during the scrape, you can open up the DB Browser and view the data which has been written.
 
@@ -62,4 +62,9 @@ This table provides summary statistics of each school's performance in a given y
 
 * TeamSplits table is currently not populating the Wins and Losses columns for games played at a Neutral site.
 
+
+##OTHER FILES
+
+* CFBData.db: sample database which shows the tables and data to be expected.
+* SampleAnalysisUsingPython&JupyterNotebook.ipynb: example code constructed in Jupyter Notebook which can used as the jumping off point for analysis of the data
 
