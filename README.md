@@ -60,7 +60,8 @@ This table provides summary statistics of each school's performance in a given y
 
 ##KNOWN BUGS
 
-* TeamSplits table is currently not populating the Wins and Losses columns for games played at a Neutral site.
+* TeamSplits and GameResults tables are currently not populating certain data for games played at a Neutral site.
+* GameResults does not have data for games played against non-FBS teams
 
 
 ##OTHER FILES
