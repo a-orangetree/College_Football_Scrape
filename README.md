@@ -27,14 +27,21 @@ This table provides a yearly summary of each school's head coach. If the coach w
 
 **Columns**: SchoolName, Year, Coach
 
-**Source Script:** PushToTeamSplits.py script
+**Source Script:** PushToTeamSplits.py
 
 ###Conference Table
 This table provides a yearly summary of each school's conference. Because schools do not change conference mid-season, there should be no concern any school has multiple conference values in a given year. 
 
 **Columns**: SchoolName, Year, Conference
 
-**Source Script:** PushToTeamSplits.py script
+**Source Script:** PushToTeamSplits.py
+
+###GameResults Table
+This table provides individual game statistics. Data for games which were played at a Neutral site is not currently being populated.
+
+**Columns**: SchoolName, Year, GameDate, Opponent, HomeOrAway, TotalYards, TotalRushes, RushingYards, RushingTDs, NumberOfPassingAtmpts, PassingCompletions, PassingYards, PassingTDs, PassingINTs, FirstDowns, NumberOfFumbles, LostFumbles, Turnovers, NumberOfPenalties, PenaltyYards, opponentTotalYards, opponentTotalRushes, opponentRushingYards, opponentRushingTDs,  opponentNumberOfPassingAtmpts, opponentPassingCompletions, opponentPassingYards, opponentPassingTDs, opponentPassingINTs, opponentFirstDowns, opponentNumberOfFumbles, opponentLostFumbles, opponentTurnovers, opponentNumberOfPenalties, opponentPenaltyYards
+
+**Source Script**: PushToGameResults.py
 
 ###SeasonResults Table
 This table provides outcome statistics of each game a school played in a given year.
