@@ -13,7 +13,6 @@ currentSchoolYear = 2016
 # Used for testing. If "Yes" only a subsection of schools will be scraped and populated in the database
 isThisATest = 'no'
 
-
 ##################################################################################
 # Below creates tables ready to receive data for the GameResults table
 print (time.asctime(time.localtime(time.time())))
@@ -157,7 +156,6 @@ def RetrieveGameStats(collegeName,year,aDate,opponent,homeOrAway):
         gameURL = 'http://www.sports-reference.com/cfb/boxscores/'+newDate+\
         '-'+collegeName+'.html'
         try:
-            #print('1')
             gameHTML = urllib.request.urlopen(gameURL).read()
         except HTTPError as e:
             #print('HTTPError Code: ', e.code)
@@ -170,7 +168,6 @@ def RetrieveGameStats(collegeName,year,aDate,opponent,homeOrAway):
         gameURL = 'http://www.sports-reference.com/cfb/boxscores/'+newDate+\
         '-'+opponentName+'.html'
         try:
-            #print('2')
             gameHTML = urllib.request.urlopen(gameURL).read()
         except HTTPError as e:
             #print('HTTPError Code: ', e.code)
@@ -182,7 +179,6 @@ def RetrieveGameStats(collegeName,year,aDate,opponent,homeOrAway):
         gameURL = 'http://www.sports-reference.com/cfb/boxscores/'+newDate+\
         '-'+collegeName+'.html'
         try:
-            #print('3')
             gameHTML = urllib.request.urlopen(gameURL).read()
         except HTTPError as e:
             #print('HTTPError Code: ', e.code)
@@ -194,8 +190,7 @@ def RetrieveGameStats(collegeName,year,aDate,opponent,homeOrAway):
             gameURL = 'http://www.sports-reference.com/cfb/boxscores/'+newDate+\
             '-'+opponentName+'.html'
             gameHTML = urllib.request.urlopen(gameURL).read()
-     
-                  
+                 
     FirstDownsHome = ''
     NumberOfRushesHome = ''
     RushingYardsHome = ''
@@ -243,39 +238,39 @@ def RetrieveGameStats(collegeName,year,aDate,opponent,homeOrAway):
         Rushing = re.findall('>\d+.*?<',str(Rushing))
         
         RushingHome = str(Rushing[0])[1:-1]
+        RushingHome = RushingHome.replace('--','-(')
         RushingHome = re.split('-?', RushingHome)
-        if ('' in RushingHome): RushingHome.remove('')
-        NumberOfRushesHome = RushingHome[0]
-        RushingYardsHome = RushingHome[1]
-        RushingTDsHome = RushingHome[2]
+        NumberOfRushesHome = RushingHome[0].replace('(','-')
+        RushingYardsHome = RushingHome[1].replace('(','-')
+        RushingTDsHome = RushingHome[2].replace('(','-')
 
         RushingVisitor = str(Rushing[1])[1:-1]
+        RushingVisitor = RushingVisitor.replace('--','-(')
         RushingVisitor = re.split('-?', RushingVisitor)
-        if ('' in RushingVisitor): RushingVisitor.remove('')
-        NumberOfRushesVisitor = RushingVisitor[0]
-        RushingYardsVisitor = RushingVisitor[1]
-        RushingTDsVisitor = RushingVisitor[2]
+        NumberOfRushesVisitor = RushingVisitor[0].replace('(','-')
+        RushingYardsVisitor = RushingVisitor[1].replace('(','-')
+        RushingTDsVisitor = RushingVisitor[2].replace('(','-')
         
         Passing = re.findall('Cmp-Att-Yd-TD-INT.+?</tr',str(tag.contents))
         Passing = re.findall('>\d+.*?<',str(Passing))
         
         PassingHome = str(Passing[0])[1:-1]
+        PassingHome = PassingHome.replace('--','-(')
         PassingHome = re.split('-?', PassingHome)
-        if ('' in PassingHome): PassingHome.remove('')
-        PassingCompletionsHome = PassingHome[0]
-        PassingAttemptsHome = PassingHome[1]
-        PassingYardsHome = PassingHome[2]
-        PassingTDsHome = PassingHome[3]
-        PassingINTsHome = PassingHome[4]
+        PassingCompletionsHome = PassingHome[0].replace('(','-')
+        PassingAttemptsHome = PassingHome[1].replace('(','-')
+        PassingYardsHome = PassingHome[2].replace('(','-')
+        PassingTDsHome = PassingHome[3].replace('(','-')
+        PassingINTsHome = PassingHome[4].replace('(','-')
 
         PassingVisitor = str(Passing[1])[1:-1]
+        PassingVisitor = PassingVisitor.replace('--','-(')
         PassingVisitor = re.split('-?', PassingVisitor)
-        if ('' in PassingVisitor): PassingVisitor.remove('')
-        PassingCompletionsVisitor = PassingVisitor[0]
-        PassingAttemptsVisitor = PassingHome[1]
-        PassingYardsVisitor = PassingVisitor[2]
-        PassingTDsVisitor = PassingVisitor[3]
-        PassingINTsVisitor = PassingVisitor[4]
+        PassingCompletionsVisitor = PassingVisitor[0].replace('(','-')
+        PassingAttemptsVisitor = PassingHome[1].replace('(','-')
+        PassingYardsVisitor = PassingVisitor[2].replace('(','-')
+        PassingTDsVisitor = PassingVisitor[3].replace('(','-')
+        PassingINTsVisitor = PassingVisitor[4].replace('(','-')
         
         TotalYards = re.findall('Total Yards.+?</tr',str(tag.contents))
         TotalYards = re.findall('>-*\d+.*?<',str(TotalYards))
