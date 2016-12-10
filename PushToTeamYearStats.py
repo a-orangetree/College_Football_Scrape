@@ -65,26 +65,52 @@ print ('An empty TeamStatistics table has been created')
 #The list is used to generate weblinks which are visited and scraped below
 collegesURL = ('http://www.sports-reference.com/cfb/schools/')
 
+isThisATest = 'No'
+
 if isThisATest != 'yes':
     try: collegesHTML = urllib.request.urlopen(collegesURL).read()
     except: print ('collegesURL is not working:',collegesURL)
     
-    collegesSoup = BeautifulSoup(collegesHTML, 'html.parser')
-    collegesTags = collegesSoup('a')
     
     colleges = list()
+    maxYear = list()
+    finalCollegeList = list()
     
+    collegesSoup = BeautifulSoup(collegesHTML, 'html.parser')
+    collegesTags = collegesSoup('a')
+        
     for tag in collegesTags:
-
         if re.search('.+/cfb/schools/.+', str(tag)):
             collegesString = str(tag.contents)[2:-2]
             collegesString = str(collegesString).lower().strip()
             collegesString = re.sub('\s','-',collegesString)
             collegesString = re.sub('[()]','',collegesString)
-            colleges.append(collegesString)
+            colleges.append(collegesString)  
         else: continue
-else: colleges = ['alabama','florida-international']
+    
+    colleges.pop(0)      
+    
+    
+    collegesTags = collegesSoup('td')
+    
+    for tag in collegesTags:
+        if re.search('data-stat="year_max"',str(tag)):
+            maxYearString = (str(tag.contents)[2:-2])
+            maxYear.append(maxYearString)
+        else: continue
+    
 
+    collegesANDmaxYear = zip(colleges, maxYear)
+    
+    for x, y in collegesANDmaxYear:
+        if(int(y) >= int(currentSchoolYear)):
+            finalCollegeList.append(x)
+        
+   
+else: finalCollegeList = ['alabama']
+
+
+print ('Created a list of schools')    
 
 ################################################################################
 
@@ -117,19 +143,25 @@ def PushToDB(collegeName,year,side,gamesPlayed,offensePassingCompletions\
         
         conn.commit()
         
+        conn.close()
+        
         
 #########################################################################        
 
 #This section iterates through weblinks using the school list above which contain game data
 #and populates the TeamSplits data in the database     
 print ('Populating the TeamStatistics table. This may take several hours.')
-for college in colleges:
+for college in finalCollegeList:
+    
+    print(college)
     
     year = thisYear
     
-    while year <= 2015:
+    while year <= currentSchoolYear:
         
-        collegeName = college    
+        print(year)
+        
+        collegeName = college
         
         collegeURL = ('http://www.sports-reference.com/cfb/schools/')\
         +str(college)+'/'+str(year)+'.html'
@@ -164,83 +196,139 @@ for college in colleges:
         penaltiesYds = ''
         turnoversByFumble = ''
         turnoversByInt = ''
-        turnoversTot = ''    
+        turnoversTot = ''   
         
-        x = 0
-        y = 0
+        opp_PassingCompletions = ''
+        opp_PassingAtmpts = ''
+        opp_PassingCompletePct = ''
+        opp_PassingTotYds = ''
+        opp_PassingTDs = ''
+        opp_RushingAtmpts = ''
+        opp_RushingTotYds = ''
+        opp_RushingAvgYds = ''
+        opp_RushingTDs = ''
+        opp_totalOffensePlays = ''
+        opp_totalOffenseTotYds = ''
+        opp_totalOffenseAvgYds = ''
+        opp_firstDownsByPassing = ''
+        opp_firstDownsByRushing = ''
+        opp_firstDownsByPenalty = ''
+        opp_firstDownsTot = ''
+        opp_penaltiesTot = ''
+        opp_penaltiesYds = ''
+        opp_turnoversByFumble = ''
+        opp_turnoversByInt = ''
+        opp_turnoversTot = ''
         
         for tag in collegeStatsTags:
-            if x == 0:
-                gamesPlayed = (str(tag.contents)[2:-2])
-            elif x == 1:
+            if re.search('data-stat="g"><',str(tag)):
+                break
+            
+            if re.search('data-stat="g"',str(tag)):
+                 gamesPlayed = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="pass_cmp"',str(tag)):
                 PassingCompletions = (str(tag.contents)[2:-2])
-            elif x == 2:
+            elif re.search('data-stat="pass_att"',str(tag)):
                 PassingAtmpts = (str(tag.contents)[2:-2])
-            elif x == 3:
+            elif re.search('data-stat="pass_cmp_pct"',str(tag)):
                 PassingCompletePct = (str(tag.contents)[2:-2])
-            elif x == 4:
+            elif re.search('data-stat="pass_yds"',str(tag)):
                 PassingTotYds = (str(tag.contents)[2:-2])
-            elif x == 5:
+            elif re.search('data-stat="pass_td"',str(tag)):
                 PassingTDs = (str(tag.contents)[2:-2])
-            elif x == 6:
+            elif re.search('data-stat="rush_att"',str(tag)):
                 RushingAtmpts = (str(tag.contents)[2:-2])
-            elif x == 7:
+            elif re.search('data-stat="rush_yds"',str(tag)):
                 RushingTotYds = (str(tag.contents)[2:-2])
-            elif x == 8:
+            elif re.search('data-stat="rush_yds_per_att"',str(tag)):
                 RushingAvgYds = (str(tag.contents)[2:-2])
-            elif x == 9:
+            elif re.search('data-stat="rush_td"',str(tag)):
                 RushingTDs = (str(tag.contents)[2:-2])
-            elif x == 10:
+            elif re.search('data-stat="tot_plays"',str(tag)):
                 totalOffensePlays = (str(tag.contents)[2:-2])
-            elif x == 11:
+            elif re.search('data-stat="tot_yds"',str(tag)):
                 totalOffenseTotYds = (str(tag.contents)[2:-2])
-            elif x == 12:
+            elif re.search('data-stat="tot_yds_per_play"',str(tag)):
                 totalOffenseAvgYds = (str(tag.contents)[2:-2])
-            elif x == 13:
+            elif re.search('data-stat="first_down_pass"',str(tag)):
                 firstDownsByPassing = (str(tag.contents)[2:-2])
-            elif x == 14:
+            elif re.search('data-stat="first_down_rush"',str(tag)):
                 firstDownsByRushing = (str(tag.contents)[2:-2])
-            elif x == 15:
+            elif re.search('data-stat="first_down_penalty"',str(tag)):
                 firstDownsByPenalty = (str(tag.contents)[2:-2])
-            elif x == 16:
+            elif re.search('data-stat="first_down"',str(tag)):
                 firstDownsTot = (str(tag.contents)[2:-2])
-            elif x == 17:
+            elif re.search('data-stat="penalty"',str(tag)):
                 penaltiesTot = (str(tag.contents)[2:-2])
-            elif x == 18:
+            elif re.search('data-stat="penalty_yds"',str(tag)):
                 penaltiesYds = (str(tag.contents)[2:-2])
-            elif x == 19:
+            elif re.search('data-stat="fumbles_lost"',str(tag)):
                 turnoversByFumble = (str(tag.contents)[2:-2])
-            elif x == 20:
+            elif re.search('data-stat="pass_int"',str(tag)):
                 turnoversByInt = (str(tag.contents)[2:-2])
-            elif x == 21:
+            elif re.search('data-stat="turnovers"',str(tag)):
                 turnoversTot = (str(tag.contents)[2:-2])
                 
-            x = x + 1
-            
-            if x == 22 and y == 1:
-
-                side = 'Defense'           
+            elif re.search('data-stat="opp_pass_cmp"',str(tag)):
+                opp_PassingCompletions = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_pass_att"',str(tag)):
+                opp_PassingAtmpts = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_pass_cmp_pct"',str(tag)):
+                opp_PassingCompletePct = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_pass_yds"',str(tag)):
+                opp_PassingTotYds = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_pass_td"',str(tag)):
+                opp_PassingTDs = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_rush_att"',str(tag)):
+                opp_RushingAtmpts = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_rush_yds"',str(tag)):
+                opp_RushingTotYds = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_rush_yds_per_att"',str(tag)):
+                opp_RushingAvgYds = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_rush_td"',str(tag)):
+                opp_RushingTDs = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_tot_plays"',str(tag)):
+                opp_totalOffensePlays = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_tot_yds"',str(tag)):
+                opp_totalOffenseTotYds = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_tot_yds_per_play"',str(tag)):
+                opp_totalOffenseAvgYds = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_first_down_pass"',str(tag)):
+                opp_firstDownsByPassing = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_first_down_rush"',str(tag)):
+                opp_firstDownsByRushing = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_first_down_penalty"',str(tag)):
+                opp_firstDownsByPenalty = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_first_down"',str(tag)):
+                opp_firstDownsTot = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_penalty"',str(tag)):
+                opp_penaltiesTot = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_penalty_yds"',str(tag)):
+                opp_penaltiesYds = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_fumbles_lost"',str(tag)):
+                opp_turnoversByFumble = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_pass_int"',str(tag)):
+                opp_turnoversByInt = (str(tag.contents)[2:-2])
+            elif re.search('data-stat="opp_turnovers"',str(tag)):
+                opp_turnoversTot = (str(tag.contents)[2:-2])
                 
-                PushToDB(collegeName,year,side,gamesPlayed,PassingCompletions\
-                    ,PassingAtmpts,PassingCompletePct,PassingTotYds\
-                    ,PassingTDs,RushingAtmpts,RushingTotYds,RushingAvgYds\
-                    ,RushingTDs,totalOffensePlays,totalOffenseTotYds,totalOffenseAvgYds\
-                    ,firstDownsByPassing,firstDownsByRushing,firstDownsByPenalty,firstDownsTot\
-                    ,penaltiesTot,penaltiesYds,turnoversByFumble,turnoversByInt,turnoversTot)
-                continue
-            
-            if x == 22 and y == 0:
+        side = 'Defense'           
+        
+        PushToDB(collegeName,year,side,gamesPlayed,opp_PassingCompletions\
+            ,opp_PassingAtmpts,opp_PassingCompletePct,opp_PassingTotYds\
+            ,opp_PassingTDs,opp_RushingAtmpts,opp_RushingTotYds,opp_RushingAvgYds\
+            ,opp_RushingTDs,opp_totalOffensePlays,opp_totalOffenseTotYds,opp_totalOffenseAvgYds\
+            ,opp_firstDownsByPassing,opp_firstDownsByRushing,opp_firstDownsByPenalty,opp_firstDownsTot\
+            ,opp_penaltiesTot,opp_penaltiesYds,opp_turnoversByFumble,opp_turnoversByInt,opp_turnoversTot)
 
-                side = 'Offense'           
-                
-                PushToDB(collegeName,year,side,gamesPlayed,PassingCompletions\
-                    ,PassingAtmpts,PassingCompletePct,PassingTotYds\
-                    ,PassingTDs,RushingAtmpts,RushingTotYds,RushingAvgYds\
-                    ,RushingTDs,totalOffensePlays,totalOffenseTotYds,totalOffenseAvgYds\
-                    ,firstDownsByPassing,firstDownsByRushing,firstDownsByPenalty,firstDownsTot\
-                    ,penaltiesTot,penaltiesYds,turnoversByFumble,turnoversByInt,turnoversTot)
-                x = 0
-                y = 1
+        side = 'Offense'           
+        
+        PushToDB(collegeName,year,side,gamesPlayed,PassingCompletions\
+            ,PassingAtmpts,PassingCompletePct,PassingTotYds\
+            ,PassingTDs,RushingAtmpts,RushingTotYds,RushingAvgYds\
+            ,RushingTDs,totalOffensePlays,totalOffenseTotYds,totalOffenseAvgYds\
+            ,firstDownsByPassing,firstDownsByRushing,firstDownsByPenalty,firstDownsTot\
+            ,penaltiesTot,penaltiesYds,turnoversByFumble,turnoversByInt,turnoversTot)
          
         year = year + 1
 

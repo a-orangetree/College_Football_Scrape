@@ -57,31 +57,52 @@ conn.close()
 #The list is used to generate weblinks which are visited and scraped below
 collegesURL = ('http://www.sports-reference.com/cfb/schools/')
 
+isThisATest = 'No'
+
 if isThisATest != 'yes':
     try: collegesHTML = urllib.request.urlopen(collegesURL).read()
     except: print ('collegesURL is not working:',collegesURL)
     
-    collegesSoup = BeautifulSoup(collegesHTML, 'html.parser')
-    collegesTags = collegesSoup('td')
     
     colleges = list()
+    maxYear = list()
+    finalCollegeList = list()
     
+    collegesSoup = BeautifulSoup(collegesHTML, 'html.parser')
+    collegesTags = collegesSoup('a')
+        
     for tag in collegesTags:
         if re.search('.+/cfb/schools/.+', str(tag)):
-            collegesString = re.findall('>.+',str(tag.contents))
-            collegesString = str(collegesString)[3:-7]
+            collegesString = str(tag.contents)[2:-2]
             collegesString = str(collegesString).lower().strip()
             collegesString = re.sub('\s','-',collegesString)
             collegesString = re.sub('[()]','',collegesString)
-            collegesString = re.sub('&amp;','',collegesString)
-        if re.search(str(currentSchoolYear), str(tag)):
-            colleges.append(collegesString)
+            colleges.append(collegesString)  
         else: continue
+    
+    colleges.pop(0)      
+    
+    
+    collegesTags = collegesSoup('td')
+    
+    for tag in collegesTags:
+        if re.search('data-stat="year_max"',str(tag)):
+            maxYearString = (str(tag.contents)[2:-2])
+            maxYear.append(maxYearString)
+        else: continue
+    
 
-else: colleges = ['georgia']
+    collegesANDmaxYear = zip(colleges, maxYear)
+    
+    for x, y in collegesANDmaxYear:
+        if(int(y) >= int(currentSchoolYear)):
+            finalCollegeList.append(x)
+        
+   
+else: finalCollegeList = ['alabama']
 
-print ('Created a list of schools')
 
+print ('Created a list of schools')   
 ###############################################################################
 
 
