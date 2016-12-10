@@ -35,11 +35,13 @@ This table provides a yearly summary of each school's conference. Because school
 **Source Script:** PushToTeamSplits.py
 
 ###GameResults Table
-This table provides individual game statistics. Data for games which were played at a Neutral site is not currently being populated.
+This table provides individual game statistics. This table does not have data for games played against non-FBS teams
 
 **Columns**: SchoolName, Year, GameDate, Opponent, HomeOrAway, TotalYards, TotalRushes, RushingYards, RushingTDs, NumberOfPassingAtmpts, PassingCompletions, PassingYards, PassingTDs, PassingINTs, FirstDowns, NumberOfFumbles, LostFumbles, Turnovers, NumberOfPenalties, PenaltyYards, opponentTotalYards, opponentTotalRushes, opponentRushingYards, opponentRushingTDs,  opponentNumberOfPassingAtmpts, opponentPassingCompletions, opponentPassingYards, opponentPassingTDs, opponentPassingINTs, opponentFirstDowns, opponentNumberOfFumbles, opponentLostFumbles, opponentTurnovers, opponentNumberOfPenalties, opponentPenaltyYards
 
 **Source Script**: PushToGameResults.py
+
+**Note:** This table is currently not populating certain data for games played at a Neutral site.
 
 ###SeasonResults Table
 This table provides outcome statistics of each game a school played in a given year.
@@ -55,6 +57,8 @@ This table provides summary statistics of each school's performance in a given y
 
 **Source Script:** PushToTeamSplits.py
 
+**Note:** This table is currently not populating certain data for games played at a Neutral site.
+
 ###TeamStatistics Table
 This table provides summary statistics of each school's performance in a given year broken out by Offense and Defense. Compared to the TeamSplits table, this table provides a higher level of aggregation.
 
@@ -62,11 +66,14 @@ This table provides summary statistics of each school's performance in a given y
 
 **Source Script:** PushToTeamYearStats.py
 
+**Note:** Duplicates exist on this table. These can be filtered either in SQL using the DISTINCT keyword, or in Python using the drop_duplicates() method.
 
-##KNOWN BUGS
+
+##KNOWN BUGS / TODO
 
 * TeamSplits and GameResults tables are currently not populating certain data for games played at a Neutral site.
 * GameResults does not have data for games played against non-FBS teams
+* Duplicates exist on the TeamStatistics table. These can be filtered either in SQL using the DISTINCT keyword, or in Python using the drop_duplicates() method.
 
 
 ##OTHER FILES
