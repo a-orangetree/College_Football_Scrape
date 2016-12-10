@@ -66,14 +66,11 @@ This table provides summary statistics of each school's performance in a given y
 
 **Source Script:** PushToTeamYearStats.py
 
-**Note:** Duplicates exist on this table. These can be filtered either in SQL using the DISTINCT keyword, or in Python using the drop_duplicates() method.
-
 
 ##KNOWN BUGS / TODO
 
 * TeamSplits and GameResults tables are currently not populating certain data for games played at a Neutral site.
 * GameResults does not have data for games played against non-FBS teams
-* Duplicates exist on the TeamStatistics table. These can be filtered either in SQL using the DISTINCT keyword, or in Python using the drop_duplicates() method.
 
 
 ##OTHER FILES
