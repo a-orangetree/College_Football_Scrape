@@ -35,7 +35,7 @@ This table displays each school's conference by year. Schools do not change conf
 **Source Script:** PushToTeamSplits.py
 
 ###GameResults Table
-This table displayes individual game statistics by opponent. If the opponent was a non-FBS team, no statistics are provided (this data is unavailable on http://www.sports-reference.com). This table is also currently not populating data for games played at a Neutral site.
+This table displayes individual game statistics by opponent. If the opponent was a non-FBS team, no statistics are provided (this data is unavailable on http://www.sports-reference.com).
 
 **Columns**: SchoolName, Year, GameDate, Opponent, HomeOrAway, TotalYards, TotalRushes, RushingYards, RushingTDs, NumberOfPassingAtmpts, PassingCompletions, PassingYards, PassingTDs, PassingINTs, FirstDowns, NumberOfFumbles, LostFumbles, Turnovers, NumberOfPenalties, PenaltyYards, opponentTotalYards, opponentTotalRushes, opponentRushingYards, opponentRushingTDs,  opponentNumberOfPassingAtmpts, opponentPassingCompletions, opponentPassingYards, opponentPassingTDs, opponentPassingINTs, opponentFirstDowns, opponentNumberOfFumbles, opponentLostFumbles, opponentTurnovers, opponentNumberOfPenalties, opponentPenaltyYards
 
@@ -84,7 +84,7 @@ This table displays the outcome of each game a school played in a given year, an
 **Source Script:** PushToSeasonResults.py
 
 ###TeamSplits Table
-This table displays statistics of each school's performance in a given year broken down first by Offense and Defense, then by Home, Road, Win, and Loss. This table is currently not populating certain data for games played at a Neutral site.
+This table displays statistics of each school's performance in a given year broken down first by Offense and Defense, then by Home, Road, Win, and Loss. 
 
 **Columns:** SchoolName, Year, Side, Value, GamesPlayed, Wins, Losses, PassCompletions, PassAtmpts, PassCompletionPct, TotalPassYds, PassTDs, TotalPlays, TotalYds, AvgYdsPerPlay, FirstDownsByPass, FirstDownsByRush, FirstDownsByPenalty, TotalFirstDowns, PenaltiesNumber, PenaltiesYds, TurnoversByFumble, TurnoversByInt, TotalTurnovers 
 
@@ -105,5 +105,3 @@ This table displays statistics of each school's performance in a given year brok
 
 
 ##KNOWN BUGS / TODO
-
-* TeamSplits and GameResults tables are currently not populating certain data for games played at a Neutral site
