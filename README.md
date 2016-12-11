@@ -20,7 +20,7 @@ SQLite DB Browser is recommended, though not required (found here: http://sqlite
 
 Once the requirements described above have been met the available scripts can be run in an environment of your choosing (e.g. Spyder, contained in the Anaconda Python distribution) without modification. Each script creates one or more tables in an SQLite database. Each table is described below. All tables and scripts are independent of each other. It is not necessary to run each script. Please take a moment to read about the available outputs and the scripts which create them below.
 
-**Running each scripts may take several hours.**
+**Running all scripts may take several hours to complete.**
 
 
 ##EXPLANATION OF TABLE OUTPUTS IN SQLITE
