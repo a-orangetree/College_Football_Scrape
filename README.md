@@ -4,7 +4,7 @@ This program performs a webscrape of college football data (FBS schools only) fr
 
 The data collected is for the past 10 years. 10 years is an arbitrary number, of course, and can be changed. The code does take some time to run (i.e. several hours). Each script is independent of the others. This allows you to populate whichever tables you want/need.
 
-I will continue to improve the performance of the script and potentially add more data as time permits. Websites change often however, and changes will potentially create bugs and make new information available or previously displayed information unavailable. 
+I will continue to improve the performance of the script and potentially add more data as time permits. Websites change often however, and changes will potentially create bugs and make new information available or previously displayed information unavailable.
 
 
 ##REQUIREMENTS
@@ -16,9 +16,16 @@ Jupyter Notebook is required to use the SampleAnalysisUsingPython&JupyterNoteboo
 SQLite DB Browser is recommended, though not required (found here: http://sqlitebrowser.org/). All the data can be accessed using Python. However, using SQLite DB Browser may make some manipulations easier. Also, at any point during the scrape, you can open up the DB Browser and view the data which has been written.
 
 
+##INSTALLATION
+
+Once the requirements described above have been met the available scripts can be run in an environment of your choosing (e.g. Spyder, contained in the Anaconda Python distribution) without modification. Each script creates one or more tables in an SQLite database. Each table is described below. All tables and scripts are independent of each other. It is not necessary to run each script. Please take a moment to read about the available outputs and the scripts which create them below.
+
+**Running each scripts may take several hours.**
+
+
 ##EXPLANATION OF TABLE OUTPUTS IN SQLITE
 
-Each Python scripts creates one or more tables in SQLite. Below identifies potential tables which can be created, what information that table contains, and which script is responsible for populating it.
+Each Python scripts creates one or more tables in SQLite. Below identifies potential tables which can be created, what information and columns that table contains, and which script is responsible for populating it.
 
 ###Coach Table
 This table displays each school's head coach by year. If the coach was not retained throughout the entire season, that given year will be duplicated and each coach, including interim head coaches, will have a separate row.
