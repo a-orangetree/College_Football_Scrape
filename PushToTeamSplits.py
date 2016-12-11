@@ -84,9 +84,8 @@ print ('Empty Coach, Conference, and TeamSplits tables have been created')
 #The list is used to generate weblinks which are visited and scraped below
 collegesURL = ('http://www.sports-reference.com/cfb/schools/')
 
-isThisATest = 'No'
 
-if isThisATest != 'yes':
+if isThisATest.lower() != 'yes':
     try: collegesHTML = urllib.request.urlopen(collegesURL).read()
     except: print ('collegesURL is not working:',collegesURL)
     

@@ -65,9 +65,7 @@ print ('An empty TeamStatistics table has been created')
 #The list is used to generate weblinks which are visited and scraped below
 collegesURL = ('http://www.sports-reference.com/cfb/schools/')
 
-isThisATest = 'No'
-
-if isThisATest != 'yes':
+if isThisATest.lower() != 'yes':
     try: collegesHTML = urllib.request.urlopen(collegesURL).read()
     except: print ('collegesURL is not working:',collegesURL)
     
@@ -153,13 +151,9 @@ def PushToDB(collegeName,year,side,gamesPlayed,offensePassingCompletions\
 print ('Populating the TeamStatistics table. This may take several hours.')
 for college in finalCollegeList:
     
-    print(college)
-    
     year = thisYear
     
     while year <= currentSchoolYear:
-        
-        print(year)
         
         collegeName = college
         
