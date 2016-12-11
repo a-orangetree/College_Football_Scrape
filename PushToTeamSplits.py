@@ -176,7 +176,7 @@ def PushToCoach(collegeName, year, coach):
 #and populates the Conference and Coach data in the database 
 print ('Populating Coach and Conference tables. May take several minutes.')
 
-for college in colleges:
+for college in finalCollegeList:
 
     year = thisYear 
     

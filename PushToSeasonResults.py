@@ -132,7 +132,7 @@ def PushToSeasonResults(schoolName,year,gameofYear,date,time,day,homeOrAway,oppo
 #and populates the Conference and Coach data in the database 
 print ('Populating the SeasonResults table. This may take several hours.')
 
-for college in colleges:
+for college in finalCollegeList:
     
     collegeName = str(college)
         
