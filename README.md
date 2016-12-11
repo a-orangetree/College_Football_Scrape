@@ -18,7 +18,7 @@ SQLite DB Browser is recommended, though not required (found here: http://sqlite
 
 ##EXPLANATION OF TABLE OUTPUTS IN SQLITE
 
-Various scripts create/update tables in an SQLite. Below identifies potential tables which can be created, what information that table contains, and which script is responsible for populating it.
+Each Python scripts creates one or more tables in SQLite. Below identifies potential tables which can be created, what information that table contains, and which script is responsible for populating it.
 
 ###Coach Table
 This table displays each school's head coach by year. If the coach was not retained throughout the entire season, that given year will be duplicated and each coach, including interim head coaches, will have a separate row.
@@ -41,35 +41,35 @@ This table displayes individual game statistics by opponent. If the opponent was
 
 **Source Script**: PushToGameResults.py
 
-###PlayerDefense
+###PlayerDefense Table
 This table displays player statistics related to defense.
 
 **Columns:** SchoolName, Year, PlayerName, SoloTackles, AssistedTackles, TotalTackles, TacklesForLoss, Sacks, Interceptions, PassesDefended, FumblesRecovered, ForcedFumbles
 
 **Source Script**: PushToPlayers.py
 
-###PlayerKickingPunting
+###PlayerKickingPunting Table
 This table displays player statistics related to kicking and punting.
 
 **Columns:** SchoolName, Year, PlayerName, ExtraPointsMade, ExtraPointsAttempted, ExtraPointsPct, FieldGoalsMade, FieldGoalsAttempted, FieldGoalsPct, Punts, PuntsYds, PuntsAvgYds
 
 **Source Script**: PushToPlayers.py
 
-###PlayerKickPuntReturns
+###PlayerKickPuntReturns Table
 This table displays player statistics related to kick and punt returns.
 
 **Columns:** SchoolName, Year, PlayerName, KickoffReturns, KickoffReturnYds, KickoffReturnAvgYds, KickoffReturnTDs, PuntReturns, PuntReturnYds, PuntReturnAvgYds, PuntReturnTDs
 
 **Source Script**: PushToPlayers.py
 
-###PlayerPassing
+###PlayerPassing Table
 This table displays player statistics related to passing.
 
 **Columns:** SchoolName, Year, PlayerName, PassingCompletions, PassingAtmpts, PassingCompletePct, PassingTotYds, PassingYardsPerAttmpt, PassingTDs, PassingINTs, PasserRating
 
 **Source Script**: PushToPlayers.py
 
-###PlayerRushingReceiving
+###PlayerRushingReceiving Table
 This table displays player statistics related to rushing and receiving.
 
 **Columns:** SchoolName, Year, PlayerName, RushingAtmpts, RushingTotYds, RushingAvgYds, RushingTDs, Receptions, ReceivingTotYds, ReceivingAvgYds, ReceivingTDs
