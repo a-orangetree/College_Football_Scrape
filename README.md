@@ -84,7 +84,7 @@ This table displays the outcome of each game a school played in a given year, an
 **Source Script:** PushToSeasonResults.py
 
 ###TeamSplits Table
-This table displays statistics of each school's performance in a given year broken down first by Offense and Defense, then by Home, Road, Win, and Loss. 
+This table displays statistics of each school's performance in a given year broken down first by Offense and Defense, then by Home, Road, Win, and Loss. This table is currently not populating data in the Wins and Losses columns for games played at a Neutral site.
 
 **Columns:** SchoolName, Year, Side, Value, GamesPlayed, Wins, Losses, PassCompletions, PassAtmpts, PassCompletionPct, TotalPassYds, PassTDs, TotalPlays, TotalYds, AvgYdsPerPlay, FirstDownsByPass, FirstDownsByRush, FirstDownsByPenalty, TotalFirstDowns, PenaltiesNumber, PenaltiesYds, TurnoversByFumble, TurnoversByInt, TotalTurnovers 
 
@@ -105,3 +105,5 @@ This table displays statistics of each school's performance in a given year brok
 
 
 ##KNOWN BUGS / TODO
+
+* TeamSplits table is currently not populating Wins and Losses columns for games played at a Neutral site.
