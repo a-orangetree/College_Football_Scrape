@@ -43,6 +43,41 @@ This table provides individual game statistics. This table does not have data fo
 
 **Note:** This table is currently not populating certain data for games played at a Neutral site.
 
+###PlayerDefense
+This table provides player level statistics related to defense.
+
+**Columns:** SchoolName, Year, PlayerName, SoloTackles, AssistedTackles, TotalTackles, TacklesForLoss, Sacks, Interceptions, PassesDefended, FumblesRecovered, ForcedFumbles
+
+**Source Script**: PushToPlayers.py
+
+###PlayerKickingPunting
+This table provides player level statistics related to kickers and punters.
+
+**Columns:** SchoolName, Year, PlayerName, ExtraPointsMade, ExtraPointsAttempted, ExtraPointsPct, FieldGoalsMade, FieldGoalsAttempted, FieldGoalsPct, Punts, PuntsYds, PuntsAvgYds
+
+**Source Script**: PushToPlayers.py
+
+###PlayerKickPuntReturns
+This table provides player level statistics related to kick and punt returns.
+
+**Columns:** SchoolName, Year, PlayerName, KickoffReturns, KickoffReturnYds, KickoffReturnAvgYds, KickoffReturnTDs, PuntReturns, PuntReturnYds, PuntReturnAvgYds, PuntReturnTDs
+
+**Source Script**: PushToPlayers.py
+
+###PlayerPassing
+This table provides player level statistics related to passing.
+
+**Columns:** SchoolName, Year, PlayerName, PassingCompletions, PassingAtmpts, PassingCompletePct, PassingTotYds, PassingYardsPerAttmpt, PassingTDs, PassingINTs, PasserRating
+
+**Source Script**: PushToPlayers.py
+
+###PlayerRushingReceiving
+This table provides player level statistics related to rushing and receiving.
+
+**Columns:** SchoolName, Year, PlayerName, RushingAtmpts, RushingTotYds, RushingAvgYds, RushingTDs, Receptions, ReceivingTotYds, ReceivingAvgYds, ReceivingTDs
+
+**Source Script**: PushToPlayers.py
+
 ###SeasonResults Table
 This table provides outcome statistics of each game a school played in a given year.
 
