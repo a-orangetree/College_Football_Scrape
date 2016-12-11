@@ -129,6 +129,8 @@ print ('Created a list of schools')
 #Defines a function to populate data in the GameResults table. The function is called in the next section.
 def RetrieveGameStats(collegeName,year,aDate,opponent,homeOrAway):
     
+    NeutralSite = ''
+    
     newYear = aDate[7:]
     
     newMonth = aDate[:3]
@@ -170,47 +172,47 @@ def RetrieveGameStats(collegeName,year,aDate,opponent,homeOrAway):
     opponentName = re.sub('\s','-',opponentName)
     opponentName = re.sub('_','-',opponentName)
     opponentName = re.sub('[()]','',opponentName)
-    
-    
+        
     if homeOrAway == 'Home':
+        
         gameURL = 'http://www.sports-reference.com/cfb/boxscores/'+newDate+\
         '-'+collegeName+'.html'
         try:
             gameHTML = urllib.request.urlopen(gameURL).read()
         except HTTPError as e:
-            #print('HTTPError Code: ', e.code)
             return
         except URLError as e:
-            #print('URLError Reason: ', e.reason)
             return
             
     elif homeOrAway == 'Away':
+        
         gameURL = 'http://www.sports-reference.com/cfb/boxscores/'+newDate+\
         '-'+opponentName+'.html'
         try:
             gameHTML = urllib.request.urlopen(gameURL).read()
         except HTTPError as e:
-            #print('HTTPError Code: ', e.code)
             return
         except URLError as e:
-            #print('URLError Reason: ', e.reason)
             return
     else:
+        
         gameURL = 'http://www.sports-reference.com/cfb/boxscores/'+newDate+\
         '-'+collegeName+'.html'
         try:
             gameHTML = urllib.request.urlopen(gameURL).read()
+            NeutralSite = 1
         except HTTPError as e:
-            #print('HTTPError Code: ', e.code)
             gameURL = 'http://www.sports-reference.com/cfb/boxscores/'+newDate+\
             '-'+opponentName+'.html'
             gameHTML = urllib.request.urlopen(gameURL).read()
+            NeutralSite = 0
         except URLError as e:
-            #print('URLError Reason: ', e.reason)
             gameURL = 'http://www.sports-reference.com/cfb/boxscores/'+newDate+\
             '-'+opponentName+'.html'
             gameHTML = urllib.request.urlopen(gameURL).read()
-                 
+            NeutralSite = 0
+          
+            
     FirstDownsHome = ''
     NumberOfRushesHome = ''
     RushingYardsHome = ''
@@ -249,6 +251,7 @@ def RetrieveGameStats(collegeName,year,aDate,opponent,homeOrAway):
     gameTags = gameSoup('div', {'id' : 'all_team_stats'})
     
     for tag in gameTags:
+        
         FirstDowns = re.findall('First Downs.+?</tr',str(tag.contents))
         FirstDowns = re.findall('>\d+.*?<',str(FirstDowns))
         FirstDownsHome = str(FirstDowns[0])[1:-1]
@@ -361,6 +364,7 @@ def RetrieveGameStats(collegeName,year,aDate,opponent,homeOrAway):
               PassingTDsVisitor, PassingINTsVisitor, FirstDownsVisitor, NumberOfFumblesVisitor,\
               LostFumblesVisitor, TurnoversVisitor, NumberOfPenaltiesVisitor, YardsOfPenaltiesVisitor)
             )
+            
     elif homeOrAway == 'Home':
         
         cur.execute('''
@@ -387,7 +391,34 @@ def RetrieveGameStats(collegeName,year,aDate,opponent,homeOrAway):
             )
             
     else:
-        cur.execute('''
+        if NeutralSite == 1:
+            
+            cur.execute('''
+                INSERT INTO GameResults (SchoolName,Year,GameDate,Opponent,HomeOrAway,
+                TotalYards, TotalRushes, RushingYards, RushingTDs,NumberOfPassingAtmpts,
+                PassingCompletions, PassingYards, PassingTDs, PassingINTs, FirstDowns, NumberOfFumbles,
+                LostFumbles, Turnovers, NumberOfPenalties, PenaltyYards, opponentTotalYards, 
+                opponentTotalRushes, opponentRushingYards, opponentRushingTDs, 
+                opponentNumberOfPassingAtmpts, opponentPassingCompletions,
+                opponentPassingYards, opponentPassingTDs, opponentPassingINTs, opponentFirstDowns,
+                opponentNumberOfFumbles, opponentLostFumbles, opponentTurnovers, 
+                opponentNumberOfPenalties, opponentPenaltyYards)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                (collegeName, year, aDate, opponent, homeOrAway,\
+                  TotalYardsVisitor, NumberOfRushesVisitor, RushingYardsVisitor, RushingTDsVisitor,\
+                  PassingAttemptsVisitor, PassingCompletionsVisitor, PassingYardsVisitor,\
+                  PassingTDsVisitor, PassingINTsVisitor, FirstDownsVisitor, NumberOfFumblesVisitor,\
+                  LostFumblesVisitor, TurnoversVisitor, NumberOfPenaltiesVisitor, YardsOfPenaltiesVisitor,\
+                  TotalYardsHome, NumberOfRushesHome, RushingYardsHome, RushingTDsHome,\
+                  PassingAttemptsHome, PassingCompletionsHome,PassingYardsHome, PassingTDsHome,\
+                  PassingINTsHome, FirstDownsHome, NumberOfFumblesHome, LostFumblesHome,\
+                  TurnoversHome, NumberOfPenaltiesHome, YardsOfPenaltiesHome)
+                )
+                
+        elif NeutralSite == 0:
+            
+            cur.execute('''
             INSERT INTO GameResults (SchoolName,Year,GameDate,Opponent,HomeOrAway,
             TotalYards, TotalRushes, RushingYards, RushingTDs,NumberOfPassingAtmpts,
             PassingCompletions, PassingYards, PassingTDs, PassingINTs, FirstDowns, NumberOfFumbles,
@@ -399,10 +430,16 @@ def RetrieveGameStats(collegeName,year,aDate,opponent,homeOrAway):
             opponentNumberOfPenalties, opponentPenaltyYards)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
             ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-            (collegeName, year, aDate, opponent, homeOrAway, '', '', '', '', '', '', '', '', '',\
-             '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')
+            (collegeName, year, aDate, opponent, homeOrAway,\
+              TotalYardsHome, NumberOfRushesHome, RushingYardsHome, RushingTDsHome,\
+              PassingAttemptsHome, PassingCompletionsHome, PassingYardsHome, PassingTDsHome,\
+              PassingINTsHome, FirstDownsHome, NumberOfFumblesHome, LostFumblesHome,\
+              TurnoversHome, NumberOfPenaltiesHome, YardsOfPenaltiesHome,\
+              TotalYardsVisitor, NumberOfRushesVisitor, RushingYardsVisitor, RushingTDsVisitor,\
+              PassingAttemptsVisitor, PassingCompletionsVisitor, PassingYardsVisitor,\
+              PassingTDsVisitor, PassingINTsVisitor, FirstDownsVisitor, NumberOfFumblesVisitor,\
+              LostFumblesVisitor, TurnoversVisitor, NumberOfPenaltiesVisitor, YardsOfPenaltiesVisitor)
             )
-        
     
     conn.commit()
     
@@ -416,7 +453,7 @@ def RetrieveGameStats(collegeName,year,aDate,opponent,homeOrAway):
 #and populates the GameResults data in the database 
 print ('Populating GameResults table. May take several hours.')
 
-for college in colleges:
+for college in finalCollegeList:
     
     collegeName = str(college)
         
