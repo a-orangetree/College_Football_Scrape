@@ -14,7 +14,7 @@ isThisATest = 'no'
 
 
 #########################################################################
-# Below creates tables ready to receive data for the Coach, Conference, and Team Splits tables
+# Below creates Coach, Conference, and Team Splits tables ready to receive data
 print (time.asctime(time.localtime(time.time())))
 thisYear = (currentSchoolYear - 9)
 
