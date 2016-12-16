@@ -290,6 +290,8 @@ def PushToKickingPunting(SchoolName,Year,PlayerName,ExtraPointsMade\
         
 ######################################################################### 
 
+#Defines a function to search text for a given string. It is used below in order to 
+#populate populate most columns in each of the tables.
 def RegexParser(statText, tag):
 
         parseThisString = 'data-stat="'+statText+'" >.+?<'
