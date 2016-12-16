@@ -15,7 +15,7 @@ isThisATest = 'no'
 
 #########################################################################
 
-# Below creates tables ready to receive data for the Player tables
+# Below creates Player tables ready to receive data 
 print (time.asctime(time.localtime(time.time())))
 thisYear = (currentSchoolYear - 9)
 
