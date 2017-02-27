@@ -1,6 +1,6 @@
 ##INTRODUCTION
 
-This program performs a webscrape of college football data (FBS schools only) from http://www.sports-reference.com. The data retrieved from the website are stored in an SQLite database, from which a sample analysis is performed. The purpose of this repository is educational. It provides useful, real-world examples of webscraping, simple database manipulation, and analysis of data using Python's Pandas library.
+This program performs a webscrape of college football data (FBS schools only) from http://www.sports-reference.com. The data is retrieved from the website are stored in an SQLite database, from which a sample analysis is performed. The purpose of this repository is educational. It provides useful, real-world examples of webscraping, simple database manipulation, and analysis of data using Python's Pandas library.
 
 The data collected is for the past 10 years. 10 years is an arbitrary number, of course, and can be changed. The code does take some time to run (i.e. several hours). Each script is independent of the others. This allows you to populate whichever tables you want/need.
 
